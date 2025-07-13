@@ -7,10 +7,15 @@
         <p class="text-sm text-gray-400">{{ $project->created_at->format('Y-m-d H:i:s') }}
             ({{ $project->created_at->diffForHumans() }})
         </p>
-        <div class="flex gap-2">
+        <div class="flex items-center gap-2">
             <a href="{{ route('projects.edit', $project) }}">
                 <p class="text-sm font-semibold text-blue-500 hover:text-blue-700 hover:underline">Edit</p>
             </a>
+            <form action="{{ route('projects.destroy', $project) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="text-sm text-red-500 hover:text-red-700 hover:underline">Destroy</button>
+            </form>
             <a class="text-sm font-semibold text-blue-500 hover:underline" href="{{ route('projects.index') }}">Back</a>
         </div>
     </div>

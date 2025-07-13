@@ -39,10 +39,15 @@
                             ({{ $project->created_at->diffForHumans() }})
                         </p>
                     </div>
-                    <div>
+                    <div class="ml-0 flex items-center">
                         <a href="{{ route('projects.edit', $project) }}">
-                            <p class="text-sm text-blue-500 hover:text-blue-700 hover:underline">Edit</p>
+                            <p class="mr-2 text-sm text-blue-500 hover:text-blue-700 hover:underline">Edit</p>
                         </a>
+                        <form action="{{ route('projects.destroy', $project) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-sm text-red-500 hover:text-red-700 hover:underline">Destroy</button>
+                        </form>
                     </div>
                 </div>
             </a>
