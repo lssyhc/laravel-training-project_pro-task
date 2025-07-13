@@ -23,7 +23,7 @@
         <ul>
             <li><strong>Backend:</strong> Laravel Framework</li>
             <li><strong>Frontend:</strong> Blade, Tailwind CSS, Alpine.js</li>
-            <li><strong>Database:</strong> MySQL (for development)</li>
+            <li><strong>Database:</strong> MySQL</li>
         </ul>
     </div>
 @endsection
