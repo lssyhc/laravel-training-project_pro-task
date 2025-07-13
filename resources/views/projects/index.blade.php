@@ -17,7 +17,7 @@
     <div class="space-y-6">
         @forelse ($projects as $project)
             <div class="border-b border-gray-200 bg-white p-6 shadow-sm sm:rounded-lg dark:border-gray-700 dark:bg-gray-800">
-                <div class="flex items-start justify-between">
+                <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
                             <a class="hover:underline" href="{{ route('projects.show', $project) }}">{{ $project->name }}</a>
