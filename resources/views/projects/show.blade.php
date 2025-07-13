@@ -49,6 +49,13 @@
                     <div class="ml-4 flex flex-shrink-0 space-x-2">
                         <a class="rounded-md bg-yellow-500 px-3 py-1 text-sm text-white hover:bg-yellow-600"
                             href="{{ route('tasks.edit', $task) }}">Edit</a>
+                        <form action="{{ route('tasks.destroy', $task) }}" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this task?');">
+                            @csrf
+                            @method('DELETE')
+                            <button class="rounded-md bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
+                                type="submit">Delete</button>
+                        </form>
                     </div>
                 </div>
             @empty

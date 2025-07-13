@@ -65,7 +65,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return redirect()->back()->with('success', 'Task successfully deleted!');
     }
 
     public function toggleComplete(Task $task)
