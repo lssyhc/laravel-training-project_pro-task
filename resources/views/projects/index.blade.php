@@ -37,7 +37,8 @@
                             onsubmit="return confirm('Are you sure you want to delete this project?');">
                             @csrf
                             @method('DELETE')
-                            <button class="rounded-md bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
+                            <button
+                                class="cursor-pointer rounded-md bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
                                 type="submit">Delete</button>
                         </form>
                     </div>

@@ -46,7 +46,8 @@
         <div class="flex justify-end space-x-4">
             <a class="rounded-md bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
                 href="{{ route('projects.show', $task->project) }}">Cancel</a>
-            <button class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" type="submit">Update
+            <button class="cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+                type="submit">Update
                 Task</button>
         </div>
     </form>

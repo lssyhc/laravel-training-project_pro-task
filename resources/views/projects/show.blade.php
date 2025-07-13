@@ -26,7 +26,7 @@
                         <form action="{{ route('tasks.toggleComplete', $task) }}" method="POST">
                             @csrf
                             @method('PATCH')
-                            <button class="mr-4" type="submit">
+                            <button class="mr-4 cursor-pointer" type="submit">
                                 @if ($task->is_completed)
                                     <svg class="h-6 w-6 text-green-500" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,8 @@
                             onsubmit="return confirm('Are you sure you want to delete this task?');">
                             @csrf
                             @method('DELETE')
-                            <button class="rounded-md bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
+                            <button
+                                class="cursor-pointer rounded-md bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
                                 type="submit">Delete</button>
                         </form>
                     </div>
