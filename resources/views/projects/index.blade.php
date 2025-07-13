@@ -1,63 +1,56 @@
 @extends('layouts.app')
-@section('title', 'Index Page')
-@section('content')
-    <div class="m-4">
-        @if (session('success'))
-            <div class="fixed bottom-3 right-3 rounded-xl bg-green-500 px-4 py-2 text-sm text-white" role="alert"
-                x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
-                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90"
-                x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-300"
-                x-transition:leave-start="opacity-100 transform scale-100"
-                x-transition:leave-end="opacity-0 transform scale-90">
-                <p>{{ session('success') }}</p>
 
-                <button class="absolute bottom-0 right-0 top-0 px-4 py-3" @click="show = false">
-                    <svg class="h-6 w-6 fill-current text-white" role="button" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20">
-                        <title>Close</title>
-                        <path
-                            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-                    </svg>
-                </button>
-            </div>
-        @endif
-        @if (!$projects->isEmpty())
-            <div class="flex justify-between">
-                <h1 class="mb-4 text-4xl font-bold">This is Index Page</h1>
-                <button><a class="rounded-lg bg-blue-500 px-4 py-2 font-medium text-white"
-                        href="{{ route('projects.create') }}">Create
-                        Project</a></button>
-            </div>
-        @endif
+@section('title', 'All Projects')
+
+@section('header')
+    <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+            All Projects
+        </h2>
+        <a class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" href="{{ route('projects.create') }}">
+            Create New Project
+        </a>
+    </div>
+@endsection
+
+@section('content')
+    <div class="space-y-6">
         @forelse ($projects as $project)
-            <a href="{{ route('projects.show', $project) }}">
-                <div class="mb-2 rounded-lg bg-white p-4 shadow-md">
-                    <div class="mb-2">
-                        <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ $project->name }}</h3>
-                        <p class="mb-0.5 text-sm text-gray-500">{{ $project->description }}</p>
-                        <p class="text-sm text-gray-400">{{ $project->created_at->format('Y-m-d H:i:s') }}
+            <div class="border-b border-gray-200 bg-white p-6 shadow-sm sm:rounded-lg dark:border-gray-700 dark:bg-gray-800">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+                            <a class="hover:underline" href="{{ route('projects.show', $project) }}">{{ $project->name }}</a>
+                        </h3>
+                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            {{ Str::limit($project->description, 150) }}
+                        </p>
+                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-500">
+                            Created: {{ $project->created_at->format('d M Y, H:i') }}
                             ({{ $project->created_at->diffForHumans() }})
                         </p>
                     </div>
-                    <div class="ml-0 flex items-center">
-                        <a href="{{ route('projects.edit', $project) }}">
-                            <p class="mr-2 text-sm text-blue-500 hover:text-blue-700 hover:underline">Edit</p>
-                        </a>
-                        <form action="{{ route('projects.destroy', $project) }}" method="POST">
+                    <div class="ml-4 flex flex-shrink-0 space-x-2">
+                        <a class="rounded-md bg-yellow-500 px-3 py-1 text-sm text-white hover:bg-yellow-600"
+                            href="{{ route('projects.edit', $project) }}">Edit</a>
+                        <form action="{{ route('projects.destroy', $project) }}" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this project?');">
                             @csrf
                             @method('DELETE')
-                            <button class="text-sm text-red-500 hover:text-red-700 hover:underline">Destroy</button>
+                            <button class="rounded-md bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
+                                type="submit">Delete</button>
                         </form>
                     </div>
                 </div>
-            </a>
+            </div>
         @empty
-            <div class="flex h-screen flex-col items-center justify-center text-4xl font-bold">
-                <h1 class="mb-2 text-4xl font-bold">This is Index Page</h1>
-                <h3 class="text-2xl font-normal text-gray-500">But there is no project yet</h3>
+            <div class="rounded-lg bg-white p-6 text-center shadow-sm dark:bg-gray-800">
+                <p class="text-gray-500 dark:text-gray-400">No projects found. <a class="text-indigo-600 hover:underline"
+                        href="{{ route('projects.create') }}">Create one</a>!</p>
             </div>
         @endforelse
-        <div class="m-2 mt-4">
+
+        <div class="mt-8">
             {{ $projects->links() }}
         </div>
     </div>

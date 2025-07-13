@@ -1,24 +1,41 @@
 @extends('layouts.app')
-@section('title', 'Edit Page')
+
+@section('title', 'Edit Project')
+
+@section('header')
+    <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+        Edit Project: {{ $project->name }}
+    </h2>
+@endsection
+
 @section('content')
-    <div class="flex h-screen flex-col items-center justify-center">
-        <h1 class="mb-12 text-center text-4xl font-bold">Edit Project</h1>
-        <form action="{{ route('projects.update', $project) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <label class="font-semibold" for="name">Name: </label>
-            <input class="rounded border p-2" id="name" name="name" type="text"
-                value="{{ old('name', $project->name) }}" />
+    <form class="space-y-6" action="{{ route('projects.update', $project) }}" method="POST">
+        @csrf
+        @method('PUT') <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="name">Project Name</label>
+            <input
+                class="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                id="name" name="name" type="text" value="{{ old('name', $project->name) }}" required>
             @error('name')
-                <p class="text-sm text-red-500">{{ $message }}</p>
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
             @enderror
-            <label class="font-semibold" for="description">Description: </label>
-            <input class="rounded border p-2" id="description" name="description" type="text"
-                value="{{ old('description', $project->description) }}" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="description">Description</label>
+            <textarea
+                class="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                id="description" name="description" rows="4">{{ old('description', $project->description) }}</textarea>
             @error('description')
-                <p class="text-sm text-red-500">{{ $message }}</p>
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
             @enderror
-            <button class="ml-2 rounded-lg border p-2 font-semibold" type="submit">Edit</button>
-        </form>
-    </div>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+            <a class="rounded-md bg-gray-200 px-4 py-2 text-gray-800 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
+                href="{{ route('projects.index') }}">Cancel</a>
+            <button class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" type="submit">Update
+                Project</button>
+        </div>
+    </form>
 @endsection
