@@ -20,7 +20,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -28,7 +28,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Project::create(
+            $request->validate([
+            'name' => 'required|min:3|max:255|string',
+            'description' => 'required'
+            ])
+        );
+
+        return redirect()->route('projects.index')->with('success', 'Project successfully created!');
     }
 
     /**
