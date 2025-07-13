@@ -12,6 +12,7 @@
     <div class="prose dark:prose-invert max-w-none">
         <p>{{ $project->description }}</p>
         <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            </p>
             <p><strong>Created at:</strong> {{ $project->created_at->format('d F Y, H:i:s') }}
                 ({{ $project->created_at->diffForHumans() }})</p>
             <p><strong>Last updated:</strong> {{ $project->updated_at->diffForHumans() }}</p>
@@ -41,9 +42,11 @@
                                 @endif
                             </button>
                         </form>
-                        <span class="{{ $task->is_completed ? 'line-through text-gray-500' : '' }}">
-                            {{ $task->title }}
-                        </span>
+                        <a class="hover:underline" href="{{ route('tasks.show', $task) }}">
+                            <span class="{{ $task->is_completed ? 'line-through text-gray-500' : '' }}">
+                                {{ $task->title }}
+                            </span>
+                        </a>
                     </div>
 
                     <div class="ml-4 flex flex-shrink-0 space-x-2">
