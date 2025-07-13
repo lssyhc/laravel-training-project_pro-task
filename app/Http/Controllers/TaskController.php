@@ -24,6 +24,7 @@ class TaskController extends Controller
         $project->tasks()->create($request->validate([
             'title' => 'required|string|min:3|max:30',
             'description' => 'nullable|max:255',
+            'deadline' => 'required|date|after_or_equal:today'
         ]));
 
         return redirect()->route('projects.show', compact('project'))->with('success', 'Task successfully created!');
