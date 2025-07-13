@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,8 @@ class ProjectController extends Controller
     {
         Project::create(
             $request->validate([
-            'name' => 'required|min:3|max:255|string',
-            'description' => 'required'
+            'name' => 'required|min:3|max:30|string',
+            'description' => 'min:3|max:255|nullable'
             ])
         );
 
@@ -51,15 +52,16 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->validated());
+        return redirect()->route('projects.index')->with('success', 'Project successfully updated!');
     }
 
     /**

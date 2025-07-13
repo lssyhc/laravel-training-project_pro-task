@@ -32,11 +32,18 @@
         @forelse ($projects as $project)
             <a href="{{ route('projects.show', $project) }}">
                 <div class="mb-2 rounded-lg bg-white p-4 shadow-md">
-                    <h3 class="text-lg font-semibold text-gray-800">{{ $project->name }}</h3>
-                    <p class="text-sm text-gray-500">{{ $project->description }}</p>
-                    <p class="text-sm text-gray-400">{{ $project->created_at->format('Y-m-d H:i:s') }}
-                        ({{ $project->created_at->diffForHumans() }})
-                    </p>
+                    <div class="mb-2">
+                        <h3 class="mb-1 text-lg font-semibold text-gray-800">{{ $project->name }}</h3>
+                        <p class="mb-0.5 text-sm text-gray-500">{{ $project->description }}</p>
+                        <p class="text-sm text-gray-400">{{ $project->created_at->format('Y-m-d H:i:s') }}
+                            ({{ $project->created_at->diffForHumans() }})
+                        </p>
+                    </div>
+                    <div>
+                        <a href="{{ route('projects.edit', $project) }}">
+                            <p class="text-sm text-blue-500 hover:text-blue-700 hover:underline">Edit</p>
+                        </a>
+                    </div>
                 </div>
             </a>
         @empty

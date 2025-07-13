@@ -7,6 +7,11 @@
         <p class="text-sm text-gray-400">{{ $project->created_at->format('Y-m-d H:i:s') }}
             ({{ $project->created_at->diffForHumans() }})
         </p>
-        <a class="text-sm font-semibold text-blue-500 hover:underline" href="{{ route('projects.index') }}">Back</a>
+        <div class="flex gap-2">
+            <a href="{{ route('projects.edit', $project) }}">
+                <p class="text-sm font-semibold text-blue-500 hover:text-blue-700 hover:underline">Edit</p>
+            </a>
+            <a class="text-sm font-semibold text-blue-500 hover:underline" href="{{ route('projects.index') }}">Back</a>
+        </div>
     </div>
 @endsection
