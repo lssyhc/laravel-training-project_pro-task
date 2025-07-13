@@ -41,6 +41,11 @@
                             {{ $task->title }}
                         </span>
                     </div>
+
+                    <div class="ml-4 flex flex-shrink-0 space-x-2">
+                        <a class="rounded-md bg-yellow-500 px-3 py-1 text-sm text-white hover:bg-yellow-600"
+                            href="{{ route('tasks.edit', $task) }}">Edit</a>
+                    </div>
                 </div>
             @empty
                 <div class="rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800">
