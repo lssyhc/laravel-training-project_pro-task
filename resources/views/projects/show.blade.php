@@ -22,21 +22,25 @@
             @forelse ($project->tasks()->latest()->get() as $task)
                 <div class="mb-4 flex items-center justify-between rounded-lg bg-white p-4 shadow dark:bg-gray-800">
                     <div class="flex items-center">
-                        <button class="mr-4" type="submit">
-                            @if ($task->is_completed)
-                                <svg class="h-6 w-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            @else
-                                <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            @endif
-                        </button>
+                        <form action="{{ route('tasks.toggleComplete', $task) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button class="mr-4" type="submit">
+                                @if ($task->is_completed)
+                                    <svg class="h-6 w-6 text-green-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                @else
+                                    <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                @endif
+                            </button>
+                        </form>
                         <span class="{{ $task->is_completed ? 'line-through text-gray-500' : '' }}">
                             {{ $task->title }}
                         </span>
