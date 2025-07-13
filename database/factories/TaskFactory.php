@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,11 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
+            'project_id' => Project::inRandomOrder()->first()->id,
             'title' => $this->faker->words(3, true),
             'description' => $this->faker->sentence(3),
-            'deadline' => $this->faker->dateTimeBetween('+1 month', '+2 months')
+            'is_completed' => $this->faker->boolean(20),
+            'deadline' => $this->faker->optional(0.5)->dateTimeBetween('now', '+1 month')
         ];
     }
 }

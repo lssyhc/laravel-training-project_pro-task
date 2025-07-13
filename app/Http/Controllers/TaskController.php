@@ -2,33 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Project $project)
     {
-        //
+        return view('projects.tasks.create', compact('project'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Project $project)
     {
-        //
+        $project->tasks()->create($request->validate([
+            'title' => 'required|string|min:3|max:30',
+            'description' => 'nullable|max:255',
+        ]));
+
+        return redirect()->route('projects.show', compact('project'))->with('success', 'Task successfully created!');
     }
 
     /**

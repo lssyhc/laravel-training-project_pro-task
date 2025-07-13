@@ -13,7 +13,7 @@ return new class () extends Migration {
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Project::class)->onDelete('cascade');
+            $table->foreignIdFor(Project::class)->constrained()->onDelete('cascade');
             $table->string('title', 255);
             $table->text('description')->nullable();
             $table->boolean('is_completed')->default(false);

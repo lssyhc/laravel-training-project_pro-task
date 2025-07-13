@@ -14,11 +14,6 @@ class TaskSeeder extends Seeder
      */
     public function run(): void
     {
-        $projects = Project::all();
-        foreach ($projects as $project) {
-            $numTasks = random_int(5, 10);
-
-            Task::factory()->count($numTasks)->for($project)->create();
-        }
+        Task::factory()->count(random_int(5, 10))->create();
     }
 }
