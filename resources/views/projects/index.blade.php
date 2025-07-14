@@ -7,9 +7,15 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
             All Projects
         </h2>
-        <a class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700" href="{{ route('projects.create') }}">
-            Create New Project
-        </a>
+        <div class="flex space-x-4">
+            <a class="rounded-md bg-gray-600 px-4 py-2 text-white hover:bg-gray-700" href="{{ route('projects.trash') }}">
+                View Trash
+            </a>
+            <a class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+                href="{{ route('projects.create') }}">
+                Create New Project
+            </a>
+        </div>
     </div>
 @endsection
 
@@ -20,7 +26,8 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
-                            <a class="hover:underline" href="{{ route('projects.show', $project) }}">{{ $project->name }}</a>
+                            <a class="hover:underline"
+                                href="{{ route('projects.show', $project) }}">{{ $project->name }}</a>
                         </h3>
                         <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                             {{ Str::limit($project->description, 150) }}
