@@ -71,11 +71,7 @@ class TaskController extends Controller
 
     public function toggleComplete(Task $task)
     {
-        $task->update([
-            'is_completed' => !$task->is_completed
-        ]);
-
-        $message = $task->is_completed ? 'The task marked is complete!' : 'Task status is returned.';
+        $message = $task->toggleStatus();
         return redirect()->back()->with('success', $message);
     }
 }

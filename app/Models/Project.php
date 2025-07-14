@@ -19,4 +19,19 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->created_at->format('d M Y, H:i');
+    }
+
+    public function getFormattedDeletedAtAttribute()
+    {
+        return $this->deleted_at ? $this->deleted_at->format('d M Y, H:i') : null;
+    }
+
+    public function getLatestTasks()
+    {
+        return $this->tasks()->latest()->get();
+    }
 }

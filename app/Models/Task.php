@@ -22,4 +22,22 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function getFormattedDeadlineAttribute()
+    {
+        return $this->deadline->format('d F Y');
+    }
+
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->created_at->format('d F Y, H:i:s');
+    }
+
+    public function toggleStatus()
+    {
+        $this->is_completed = !$this->is_completed;
+        $this->save();
+
+        return $this->is_completed ? 'The task is marked as complete!' : 'Task status is returned.';
+    }
 }

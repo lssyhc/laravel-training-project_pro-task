@@ -14,7 +14,7 @@
     </div>
     <div class="space-y-6">
         @forelse ($projects as $project)
-            <div class="border-b border-gray-200 bg-white p-6 shadow-sm sm:rounded-lg dark:border-gray-700 dark:bg-gray-800">
+            <x-card>
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
@@ -23,32 +23,26 @@
                         <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                             {{ Str::limit($project->description, 150) }}
                         </p>
-                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-500">
-                            Deleted at: {{ $project->deleted_at->format('d M Y, H:i') }}
+                        <p class="text-meta mt-2">
+                            Deleted at: {{ $project->formatted_deleted_at }}
                         </p>
                     </div>
                     <div class="ml-4 flex flex-shrink-0 space-x-2">
                         <form action="{{ route('projects.restore', $project) }}" method="POST">
                             @csrf
-                            <button
-                                class="cursor-pointer rounded-md bg-green-500 px-3 py-1 text-sm text-white hover:bg-green-600"
-                                type="submit">Restore</button>
+                            <x-button variant="success" size="small">Restore</x-button>
                         </form>
                         <form action="{{ route('projects.forceDelete', $project) }}" method="POST"
                             onsubmit="return confirm('This action is irreversible. Are you sure you want to permanently delete this project?');">
                             @csrf
                             @method('DELETE')
-                            <button
-                                class="cursor-pointer rounded-md bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700"
-                                type="submit">Delete Permanently</button>
+                            <x-button variant="danger" size="small">Delete Permanently</x-button>
                         </form>
                     </div>
                 </div>
-            </div>
+            </x-card>
         @empty
-            <div class="rounded-lg bg-white p-6 text-center shadow-sm dark:bg-gray-800">
-                <p class="text-gray-500 dark:text-gray-400">The trash is empty.</p>
-            </div>
+            <x-empty-state message="The trash is empty." />
         @endforelse
 
         <div class="mt-8">

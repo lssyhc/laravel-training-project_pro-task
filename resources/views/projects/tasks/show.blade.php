@@ -12,16 +12,17 @@
     <div class="prose dark:prose-invert max-w-none">
         <p>{{ $task->description }}</p>
         <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
-            <p class="mb-4 text-red-500"><strong>Deadline:</strong> {{ $task->deadline->format('d F Y') }}
+            <p class="mb-4 text-red-500"><strong>Deadline:</strong> {{ $task->formatted_deadline }}
                 ({{ $task->deadline->diffForHumans() }})</p>
-            <p><strong>Created at:</strong> {{ $task->created_at->format('d F Y, H:i:s') }}
+            <p><strong>Created at:</strong> {{ $task->formatted_created_at }}
                 ({{ $task->created_at->diffForHumans() }})</p>
             <p><strong>Last updated:</strong> {{ $task->updated_at->diffForHumans() }}</p>
         </div>
 
         <div class="mt-8">
-            <a class="rounded-md bg-gray-200 px-4 py-2 text-gray-800 no-underline hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
-                href="{{ route('projects.show', $task->project) }}">Back to Project</a>
+            <x-link-button href="{{ route('projects.show', $task->project) }}" variant="secondary">
+                Back to Project
+            </x-link-button>
         </div>
     </div>
 @endsection
